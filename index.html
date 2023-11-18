@@ -20,6 +20,10 @@
         ul li a {
             color: grey;
         }
+        
+        ul li a.clicked {
+            color: aquamarine !important;
+        }
     </style>
 </head>
 
@@ -142,6 +146,12 @@
                     var videoId = this.querySelector('a').getAttribute('href').split('/').pop();
                     var videoTitle = this.querySelector('a').innerText;
                     changeVideo(event, videoId, videoTitle);
+                    liElements.forEach(function(otherLi) {
+                        if (otherLi !== li) {
+                            otherLi.querySelector('a').classList.remove('clicked');
+                        }
+                    });
+                    this.querySelector('a').classList.add('clicked');
                 });
             });
         });
