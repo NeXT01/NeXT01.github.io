@@ -4,11 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>视频播放器</title>
+    <title>交易之王凉兮，最高贵的王者</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-        /* 添加自定义样式 */
-        
         ul {
             list-style-type: none;
         }
@@ -16,7 +14,6 @@
         li {
             margin-bottom: 0.5rem;
             font-size: 1rem;
-            /* 设置字体大小，可以根据需要调整 */
         }
     </style>
 </head>
@@ -26,8 +23,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
-                <iframe id="videoFrame" width="1280" height="720" src="https://www.youtube.com/embed/r601NrXMsx8?list=PLgt2lofFDNIsDw8oRIas22aVSPMx5mNx0" title="降低市场预期，培养交易心法" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" id="videoFrame" src="https://www.youtube.com/embed/r601NrXMsx8?list=PLgt2lofFDNIsDw8oRIas22aVSPMx5mNx0" title="降低市场预期，培养交易心法" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <h5 id="videoTitle"></h5>
             </div>
 
             <div class="col-md-4">
@@ -119,55 +119,35 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-        // 在页面加载完成后运行
         document.addEventListener("DOMContentLoaded", function() {
-            // 获取所有 ul 元素
             var ulElements = document.querySelectorAll('ul');
-
-            // 对每个 ul 元素执行操作
             ulElements.forEach(function(ul, index) {
-                // 获取该 ul 下的所有 li 元素
-                var liElements = ul.querySelectorAll('li');
-
-                // 对每个 li 元素执行操作，为其内容添加序号
-                liElements.forEach(function(li, liIndex) {
-                    // 计算序号
-                    var number = liIndex + 1;
-
-                    // 在 li 内容前添加序号
-                    li.innerHTML = number + '. ' + li.innerHTML;
+                var aElements = ul.querySelectorAll('a');
+                aElements.forEach(function(a, aIndex) {
+                    var number = aIndex + 1;
+                    a.innerHTML = number + '. ' + a.innerHTML;
                 });
             });
         });
-        document.addEventListener("DOMContentLoaded", function() {
-            // 获取所有 li 元素
-            var liElements = document.querySelectorAll('li');
 
-            // 对每个 li 元素执行操作，为其添加点击事件
+        document.addEventListener("DOMContentLoaded", function() {
+            var liElements = document.querySelectorAll('li');
             liElements.forEach(function(li) {
                 li.addEventListener('click', function(event) {
-                    // 获取点击的 li 元素中的 a 标签的 href 属性
                     var videoId = this.querySelector('a').getAttribute('href').split('/').pop();
-
-                    // 调用函数切换视频，并阻止默认的点击行为
-                    changeVideo(event, videoId);
+                    var videoTitle = this.querySelector('a').innerText;
+                    changeVideo(event, videoId, videoTitle);
                 });
             });
         });
 
-        // 切换视频的函数
-        function changeVideo(event, videoId) {
-            // 阻止默认的点击行为
+        function changeVideo(event, videoId, title) {
             event.preventDefault();
-
-            // 构建新的视频链接
             var newSrc = 'https://www.youtube.com/embed/' + videoId;
-
-            // 获取视频框架元素
             var videoFrame = document.getElementById('videoFrame');
-
-            // 设置新的视频链接
             videoFrame.src = newSrc;
+            var videoTitle = document.getElementById('videoTitle');
+            videoTitle.innerText = title
         }
     </script>
 </body>
