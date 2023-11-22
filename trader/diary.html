@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>交易之王凉兮，最高贵的王者</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        #lVideo {
+            position: relative;
+            float: left;
+            width: 65%;
+        }
+        
+        #rList {
+            float: left;
+            width: 35%;
+            height: 100vh;
+            padding: 20px;
+            overflow-y: scroll;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        li a {
+            color: #333;
+        }
+        
+        li a.clicked {
+            color: indianred !important;
+        }
+        
+        #videoTitle {
+            padding: 5px;
+            margin: 10px;
+            text-align: center;
+        }
+        
+        @media screen and (max-width: 601px) {
+            #lVideo {
+                width: 100%;
+                float: right;
+            }
+            #rList {
+                width: 100%;
+                float: right;
+                padding: 0px;
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="mmmmm">
+            <a class="navbar-brand" href="/">交易之王凉兮，最高贵的王者</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">yuchiTrader交易教程</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/trader/diary.html">孤独交易手回忆录</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutme/index.html">关于我</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row">
+            <div id="lVideo">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" id="videoFrame" src="1.txt" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <h5 id="videoTitle"></h5>
+            </div>
+            <div id="rList">
+                <ul id="videoList">
+                    <li><a href="https://youtu.be/C28mLEZoLPo?list=PLgt2lofFDNIuTlazux74CJIwAN7scezy5">交易入门</a></li>
+                    <li><a href="https://youtu.be/C28mLEZoLPo?list=PLgt2lofFDNIuTlazux74CJIwAN7scezy5">2</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ulElements = document.querySelectorAll('#rList ul');
+            ulElements.forEach(function(ul, index) {
+                var aElements = ul.querySelectorAll('a');
+                aElements.forEach(function(a, aIndex) {
+                    var number = aIndex + 1;
+                    a.innerHTML = number + '. ' + a.innerHTML;
+                });
+            });
+        });
+
+
+        var videoList = document.getElementById('videoList');
+
+        // 获取videoFrame和videoTitle元素
+        var videoFrame = document.getElementById('videoFrame');
+        var videoTitle = document.getElementById('videoTitle');
+
+        // 为ul中的每个li元素添加点击事件
+        for (var i = 0; i < videoList.children.length; i++) {
+            videoList.children[i].addEventListener('click', function(event) {
+                // 阻止默认行为，以防止页面跳转
+                event.preventDefault();
+
+                // 获取被点击的li元素的索引
+                var index = Array.prototype.indexOf.call(videoList.children, this);
+
+                // 根据索引确定要加载的视频文件
+                var videoSrc = (index + 1) + '.txt';
+
+                // 更改iframe的src属性
+                videoFrame.src = videoSrc;
+
+                // 可选：更新标题
+                videoTitle.textContent = videoSrc; // 你可能有一个更好的标题逻辑
+            });
+        }
+    </script>
+</body>
+
+</html>
